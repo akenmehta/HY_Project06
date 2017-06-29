@@ -58,6 +58,7 @@ class App extends React.Component {
 		return(
 			<div>
 				<h1>chatReact</h1>
+				<h3>Chat in real-time with people that are online.</h3>
 				<main>
 					<ul id="list">
 						{this.state.allMessages.map( (message) => {
@@ -128,7 +129,8 @@ class App extends React.Component {
 	    this.setState({
 	      allMessages: newState
 	    });
-	     this.scrollToBottom();
+
+	    this.scrollToBottom();
 	  });
 	}
 
@@ -138,7 +140,7 @@ class App extends React.Component {
 	}
 
 	componentDidUpdate() {
-	     this.scrollToBottom();
+	    this.scrollToBottom();
 	}
 
 }
