@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; 
+import Moment from 'moment';
 
 var config = {
 apiKey: "AIzaSyDbl_Rr4UZl9VYZYll84wsEGWrlw3KxD1Y",
@@ -17,9 +18,10 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			name: '',
 			noName: true,
+			name: '',
 			currentMessage : '',
+			date: '',
 			allMessages: [],
 		}
 		this.handleChange = this.handleChange.bind(this);
@@ -32,7 +34,8 @@ class App extends React.Component {
 		const itemsRef = firebase.database().ref('items');
 		const item = {
 			message: this.state.currentMessage,
-			name: this.state.name
+			name: this.state.name,
+			date: Moment().format('lll')
 		}
 		if(this.state.currentMessage !== '')
 			itemsRef.push(item);
@@ -51,7 +54,7 @@ class App extends React.Component {
 
 	handleSubmitName(e) {
 		e.preventDefault();
-		this.setState({ noName: false});
+		this.setState({ noName: false });
 	}
 
 	render() {
@@ -62,49 +65,23 @@ class App extends React.Component {
 				<main>
 					<ul id="list">
 						{this.state.allMessages.map( (message) => {
-							return(
-									<li key={message.id}>
-										<p className="name">{message.name}</p>
-										<p className="message">{message.message}</p>
-									</li>								
-							);
+							return	<Messages key={message.id}
+											  name={message.name}
+											  message={message.message}
+											  date={message.date}/> 
 						})}
-						<li style={{ float:"left", clear: "both", border: "none", height: 0, margin: 0, background: '#fff'}}
-	             		ref={(el) => { this.messagesEnd = el; }} />
+						<li className="invisible-li"
+	             			ref={(el) => { this.messagesEnd = el; }} />
 					</ul>
 
 					{this.state.noName ? 
-						(
-							<form onSubmit={this.handleSubmitName}>
-								<input 
-									type="text" 
-									name="name" 
-									value={this.state.name} 
-									onChange={this.handleChange}
-									placeholder="Enter name">
-								</input>
-
-								<input
-									type="submit"
-									value="GO">
-								</input>
-							</form>
+						( <NameForm submit={this.handleSubmitName}
+									value={this.state.name}
+									change={this.handleChange} />
 						) :
-						(
-							<form onSubmit={this.handleSubmitMessages}>
-								<input 
-									type="text" 
-									name="currentMessage" 
-									value={this.state.currentMessage} 
-									onChange={this.handleChange}
-									placeholder="Enter message">
-								</input>
-
-								<input
-									type="submit"
-									value="GO">
-								</input>
-							</form>
+						( <MessageForm submit={this.handleSubmitMessages}
+									   value={this.state.currentMessage}
+									   change={this.handleChange} />
 						)}
 				</main>
 			</div>
@@ -122,7 +99,8 @@ class App extends React.Component {
 	      newState.push({
 	        id: item,
 	        message: items[item].message,
-	        name: items[item].name
+	        name: items[item].name,
+	        date: items[item].date
 	      });
 	    }
 
@@ -144,5 +122,55 @@ class App extends React.Component {
 	}
 
 }
+
+const MessageForm = (props) => {
+	return (
+		<form onSubmit={props.submit}>
+			<input 
+				type="text" 
+				name="currentMessage" 
+				value={props.value} 
+				onChange={props.change}
+				placeholder="Enter message">
+			</input>
+
+			<input
+				type="submit"
+				value="GO">
+			</input>
+		</form>
+	);
+};
+
+const NameForm = (props) => {
+	return (
+		<form onSubmit={props.submit}>
+			<input 
+				type="text" 
+				name="name" 
+				value={props.value} 
+				onChange={props.change}
+				placeholder="Enter name">
+			</input>
+
+			<input
+				type="submit"
+				value="GO">
+			</input>
+		</form>
+	);
+};
+
+const Messages = (props) => {
+	return (
+		<li>
+			<p className="name">
+				{props.name}
+				<span className="date">{props.date}</span>
+			</p>
+			<p className="message">{props.message}</p>
+		</li>
+	);
+};
 
 ReactDOM.render(<App />, document.getElementById('app'));

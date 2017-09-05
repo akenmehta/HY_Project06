@@ -1,8 +1,5 @@
 body {
 	height: 98vh;
-	// background: #24C6DC;  
- //    background: -webkit-linear-gradient(to bottom, #514A9D, #24C6DC); 
- //    background: linear-gradient(to bottom, #514A9D, #24C6DC);
     font-family: 'Spectral';
     background-image: linear-gradient(rgba(19, 18, 17, 0.40), rgba(31, 31, 27, 0.40)), url(../../public/assets/mainImage.jpg);
     background-position: center center;
@@ -71,13 +68,28 @@ form {
 .name {
 	font-weight: bold;
 }
-
+.invisible-li {
+	float: left;
+	clear: both;
+	border: none; 
+	height: 0;
+	margin: 0;
+	background: #fff;
+}
+.date {
+	font-weight: normal;
+	font-size: 14px;
+	margin-left: 20px;
+}
 @media (max-width: 650px){
 	main {
 		width: 85%;
 		li, input {
 			font-size: 15px;
 		}
+	}
+	.date {
+		font-size: 12px;
 	}
 }
 
