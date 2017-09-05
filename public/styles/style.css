@@ -1,0 +1,85 @@
+body {
+  height: 98vh;
+  font-family: 'Spectral';
+  background-image: linear-gradient(rgba(19, 18, 17, 0.4), rgba(31, 31, 27, 0.4)), url(../../public/assets/mainImage.jpg);
+  background-position: center center;
+  background-size: cover; }
+
+h1 {
+  text-align: center;
+  font-size: 35px;
+  margin: 5px;
+  color: #fff; }
+
+h3 {
+  text-align: center;
+  margin: 5px;
+  color: #fff; }
+
+main {
+  width: 60%;
+  margin: 0 auto;
+  padding: 40px 20px;
+  border-radius: 10px;
+  background: #c9d0db; }
+
+ul {
+  list-style-type: none;
+  height: 400px;
+  overflow-y: scroll;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border-top: 1px solid #dbdde8; }
+  ul li {
+    border-radius: 5px;
+    padding: 5px;
+    width: inherit;
+    margin: 15px;
+    background: rgba(17, 223, 213, 0.2);
+    font-size: 18px; }
+  ul p {
+    margin: 0; }
+
+form {
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid #dbdde0; }
+  form input {
+    display: inline-block;
+    border: none;
+    outline: none;
+    padding: 1%;
+    font-size: 18px; }
+  form input[type=text] {
+    width: 80%; }
+  form input[type=submit] {
+    width: 18%;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: #3ae050; }
+
+.name {
+  font-weight: bold; }
+
+.invisible-li {
+  float: left;
+  clear: both;
+  border: none;
+  height: 0;
+  margin: 0;
+  background: #fff; }
+
+.date {
+  font-weight: normal;
+  font-size: 14px;
+  margin-left: 20px; }
+
+@media (max-width: 650px) {
+  main {
+    width: 85%; }
+    main li, main input {
+      font-size: 15px; }
+  .date {
+    font-size: 12px; } }
